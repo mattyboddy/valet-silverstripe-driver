@@ -1,5 +1,9 @@
 <?php
 
+namespace Valet\Drivers\Custom;
+
+use Valet\Drivers\ValetDriver;
+
 class SilverStripeValetDriver extends ValetDriver
 {
     /**
@@ -10,7 +14,7 @@ class SilverStripeValetDriver extends ValetDriver
      * @param  string  $uri
      * @return bool
      */
-    public function serves($sitePath, $siteName, $uri)
+    public function serves(string $sitePath, string $siteName, string $uri): bool
     {
         if (file_exists($sitePath.'/cms') && file_exists($sitePath.'/framework')) {
             return true;
@@ -27,7 +31,7 @@ class SilverStripeValetDriver extends ValetDriver
      * @param  string  $uri
      * @return string|false
      */
-    public function isStaticFile($sitePath, $siteName, $uri)
+    public function isStaticFile(string $sitePath, string $siteName, string $uri)/*: string|false */
     {
         if (file_exists($sitePath.$uri) &&
             ! is_dir($sitePath.$uri) &&
@@ -46,7 +50,7 @@ class SilverStripeValetDriver extends ValetDriver
      * @param  string  $uri
      * @return string
      */
-    public function frontControllerPath($sitePath, $siteName, $uri)
+    public function frontControllerPath(string $sitePath, string $siteName, string $uri): string
     {
         if (file_exists($sitePath.$uri) && ! is_dir($sitePath.$uri)) {
             return $sitePath.$uri;
